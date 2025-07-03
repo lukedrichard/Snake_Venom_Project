@@ -62,6 +62,5 @@ with torch.no_grad():
 final_embeddings = torch.cat(all_embeddings, dim=0)
 np.save('processed_data/embeddings/protbert_embeddings.npy',final_embeddings.numpy())
 
-#embeddings = np.load('processed_data/embeddings/protbert_embeddings.npy')
-#print(embeddings.shape)  # This should print (num_sequences, embedding_dim)
-#print(embeddings)
+embeddings = np.load('processed_data/embeddings/protbert_embeddings.npy')
+print(embeddings.shape)  # This should print (num_sequences, embedding_dim)
