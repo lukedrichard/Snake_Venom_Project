@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
@@ -198,6 +200,43 @@ plt.ylabel('Accuracy (%)')
 plt.title('Accuracy Over Epochs')
 plt.savefig('accuracy_plot.png')  # Save accuracy plot
 plt.close()  # Close the figure
+
+
+#confusion matrix
+all_preds = []
+all_labels = []
+
+model.eval()
+with torch.no_grad():
+    for batch in val_loader:
+        inputs, labels = batch  # assuming labels are already numerical
+        inputs = inputs.to(device)
+        labels = labels.to(device)
+
+        outputs = model(inputs)
+        _, preds = torch.max(outputs, 1)
+
+        all_preds.extend(preds.cpu().numpy())
+        all_labels.extend(labels.cpu().numpy())
+
+#generate confusion matrix
+cm = confusion_matrix(all_labels, all_preds)
+print(cm)
+
+#plot confusion matrix
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.title('Confusion Matrix')
+plt.savefig('confusion_matrix.png')  # Save accuracy plot
+plt.close()  # Close the figure
+
+
+print("\nLabel index to name mapping:")
+for index, label in sorted(label_to_index.items()):
+    print(f"{index}: {label}")
+
 
 # Save the model
 torch.save(model, 'protein_mlp.pth')

@@ -6,3 +6,5 @@ transformers
 pandas
 requests
 biopython
+scikit-learn
+seaborn
