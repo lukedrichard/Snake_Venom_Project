@@ -1,8 +1,3 @@
 # Snake_Venom_Project
 
-## Installation
-
-To install dependencies, run:
-
-```bash
-pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cu118
+[Google Drive Project Folder](https://drive.google.com/drive/u/0/folders/1VdOwGOoSgyxr-MO9OMySLKh4WcaKoVQp)
