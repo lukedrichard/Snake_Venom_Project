@@ -63,10 +63,14 @@ def make_protBERT_embeddings(metadata_path, protein_seuqences_path, output_path)
     final_embeddings = torch.cat(all_embeddings, dim=0)
     np.save(output_path,final_embeddings.numpy())
 
-    embeddings = np.load(output_path)
-    print(embeddings.shape)  # This should print (num_sequences, embedding_dim)
+    return
 
+metadata_path = "raw_data/metadata/clustered_metadata.csv"
+protein_seuqences_path = "raw_data/protein_sequences/clustered_protein_sequences.csv"
+output_path = "processed_data/embeddings/clustered_protbert_embeddings.npy"
 
-make_protBERT_embeddings("raw_data/metadata/clustered_metadata.csv",
-                         "raw_data/protein_sequences/clustered_protein_sequences.csv",
-                         "processed_data/embeddings/clustered_protbert_embeddings")
+make_protBERT_embeddings(metadata_path, protein_seuqences_path, output_path)
+
+#chekc they are there and correct dimension
+embeddings = np.load(output_path)
+print(embeddings.shape)  # This should print (num_sequences, embedding_dim)
