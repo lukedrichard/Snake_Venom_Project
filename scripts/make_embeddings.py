@@ -4,10 +4,18 @@ from torch.utils.data import Dataset, DataLoader
 from transformers import BertModel, BertTokenizer
 import numpy as np
 from tqdm import tqdm
+import os
 
-def make_protBERT_embeddings(metadata_path, protein_seuqences_path, output_path):
+# Set working directory: your/path/Snake_Venom_Project
+os.chdir("/home/ldrich/Summer2025BHT/Workflow_Course/Snake_Venom_Project")
+
+# Check current working directory
+print("Current working directory:", os.getcwd())
+
+
+def make_protBERT_embeddings(protein_seuqences_path, output_path):
     #get .csv files
-    metadata = pd.read_csv(metadata_path)
+    #metadata = pd.read_csv(metadata_path)
     sequences_df = pd.read_csv(protein_seuqences_path)
 
     sequences = sequences_df['protein_sequence'].tolist()
@@ -65,12 +73,33 @@ def make_protBERT_embeddings(metadata_path, protein_seuqences_path, output_path)
 
     return
 
+
+'''
 metadata_path = "raw_data/metadata/clustered_metadata.csv"
 protein_seuqences_path = "raw_data/protein_sequences/clustered_protein_sequences.csv"
 output_path = "processed_data/embeddings/clustered_protbert_embeddings.npy"
 
-make_protBERT_embeddings(metadata_path, protein_seuqences_path, output_path)
+make_protBERT_embeddings(protein_seuqences_path, output_path)
 
-#chekc they are there and correct dimension
+#check they are there and correct dimension
 embeddings = np.load(output_path)
 print(embeddings.shape)  # This should print (num_sequences, embedding_dim)
+'''
+
+
+input_dir = 'raw_data/protein_sequences/fragmented_test_sequences'
+output_dir = 'processed_data/embeddings/fragments'
+os.makedirs(output_dir, exist_ok=True)
+
+for file in os.listdir(input_dir):
+
+    if file.endswith('.csv'):
+        file_path = os.path.join(input_dir, file)
+        output_path = os.path.join(output_dir, f'{file.replace(".csv", "")}_embeddings.npy')
+
+
+    make_protBERT_embeddings(file_path, output_path)
+
+    #check they are there and correct dimension
+    embeddings = np.load(output_path)
+    print(embeddings.shape)  # This should print (num_sequences, embedding_dim)
