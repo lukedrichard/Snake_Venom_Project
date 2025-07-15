@@ -9,10 +9,10 @@ def evaluate(device, model, data_loader, results_dir):
     output_dim = model.output_dim
     #confusion matrix, precision, recall, f1
     accuracy = Accuracy(task='multiclass', num_classes=output_dim, average='micro').to(device)
-    precision = Precision(task='multiclass',num_classes=output_dim,average='macro').to(device)
-    recall = Recall(task='multiclass',num_classes=output_dim,average='macro').to(device)
-    f1 = F1Score(task='multiclass',num_classes=output_dim,average='macro').to(device)
-    roc_auc = MulticlassAUROC(num_classes=output_dim)
+    precision = Precision(task='multiclass',num_classes=output_dim,average='weighted').to(device)
+    recall = Recall(task='multiclass',num_classes=output_dim,average='weighted').to(device)
+    f1 = F1Score(task='multiclass',num_classes=output_dim,average='weighted').to(device)
+    roc_auc = MulticlassAUROC(num_classes=output_dim, average='weighted').to(device)
 
 
     all_preds = []

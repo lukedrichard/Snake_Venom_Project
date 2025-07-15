@@ -15,8 +15,8 @@ learning_rate = 1e-3
 num_epochs = 500
 
 #change depending on your embeddings
-input_dim = 1024 #protBERT embedding dimension
-#input_dim = 8420 #kmer embeddings dimension
+#input_dim = 1024 #protBERT embedding dimension
+input_dim = 8420 #kmer embeddings dimension
 
 hidden_dim = 512   
 output_dim = 6 #number of protein classes      
@@ -26,10 +26,10 @@ dropout = 0.7
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 #set paths
-metadata_path = 'raw_data/metadata/metadata.csv'
-protein_sequences_path = 'processed_data/embeddings/protbert_embeddings.npy'
+metadata_path = 'raw_data/metadata/clustered_metadata.csv'
+protein_sequences_path = 'processed_data/embeddings/kmer_embeddings.npy'
 # !!! change for new experiment !!!
-results_dir = 'results/protbert/' 
+results_dir = 'results/deduplicated_kmer/' 
 
 #make directory for results
 os.makedirs(results_dir, exist_ok=True)
