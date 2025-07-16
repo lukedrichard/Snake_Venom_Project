@@ -21,7 +21,7 @@ These can be used to train models on the *full dataset*.<br><br>
 
 Adittionally, the data is deduplicated using CD-HIT. These files can be found in `raw_data/Clustered_Fasta`<br>
 For each protein family, two files are produced by the CD-HIT process.<br>
-The filese ending with `.fasta.clst` shows which proteins were gropued together and which protein is used as the cluster representative.<br>
+The file ending with `.fasta.clst` shows which proteins were gropued together and which protein is used as the cluster representative.<br>
 Those ending with `.fasta` are the deduplicated data that is used in most of the experiments.<br>
 The `.fasta` files are then parsed to create `clustered_metadata.csv` and `clusterd_protein_sequence.csv`. These can be found in `raw_data`<br>
 These files can be used to train models on the *deduplicated dataset*<br><br>
