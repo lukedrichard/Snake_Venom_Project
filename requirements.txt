@@ -8,4 +8,4 @@ pandas
 requests
 biopython
 scikit-learn
-seaborn
+seaborn 
