@@ -32,14 +32,14 @@ These are used to test model robustness. The data is stored in `raw_data/protein
 ## Feature Extraction
 Since raw protein sequences are strings of amino acids, this data needs to be vectorized into numerical representation for use in machine learning models. We used *k-mer frequency encoding*, a classic approach for handcrafted features. We also used embeddings from the pre-trained *protBERT* model<br>
 
-For the k-mer feaures, ...<br>
+For the k-mer feaures, we extract frequency counts of all subsequences of length 1, 2, and 3 from each protein sequence. These counts are normalized and used as handcrafted numerical features representing the sequence composition and local patterns. This approach captures the presence and distribution of amino acid motifs and is implemented in `Notebooks/ProteinFeatureGenerate_deduplicated.ipynb` and the processed feature dataset is in `processed_data/protein_features/processed_protein_features.csv`. Finally, for the model training , the feature dataset is divided into train-test-validation split based on cluster_metadata.csv file in `processed_data/Split_data` <br>
 
 For the *protBERT* embeddings, we simply acces the model through huggingface. The final state of the $[CLS]$ token is saved as the protein sequence embedding. This process can be run with `scripts/make_embeddings.py`. The embeddings can be found in `processed_data/embeddings`<br>
 
 Futhermore, visualizations of the features can be generated with `Notebooks/t_sne.ipynb` and are stored in `plots`
 
 ## Models
-Random Forest...<br>
+Random Forest and Adaboost classifiers are trained on the k-mer features and evaluated using cross-validation with weighted metrics to handle class imbalance. We perform hyperparameter tuning with randomized search to find the best combination of tree depth, number of estimators, and splitting criteria. This approach helps capture non-linear patterns in the handcrafted features and implented in `Notebooks/ClassicAlgorithm_Deduplicated.ipynb`.<br>
 
 We also implement 4-layer MLPs as classifiers. Model training and evaluation can be performed with ~/scripts/main.py. There are two MLP architecures. Both use 4-layers, but the hidden dimensions are different depending on whether k-mer features or embeddings are used. <br><br>
 
