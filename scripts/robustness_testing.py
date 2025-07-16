@@ -7,37 +7,30 @@ import torch.nn as nn
 import torch.optim as optim
 import os
 
-# Set working directory: your/path/Snake_Venom_Project
-os.chdir("/home/ldrich/Summer2025BHT/Workflow_Course/Snake_Venom_Project")
 
-# Check current working directory
-print("Current working directory:", os.getcwd())
+'''Certain configurations need to be set by hand. Double check before running script.
+These include: metadata_path, protein_sequences_path, results_dir, model_path'''
 
 # set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 #set paths
-metadata_path = 'raw_data/protein_sequences/fragmented_test_sequences/fragments_len25.csv'
-protein_sequences_path = 'processed_data/embeddings/fragments/fragments_len25_embeddings.npy'
+metadata_path = '../raw_data/protein_sequences/fragmented_test_sequences/fragments_len25.csv'
+protein_sequences_path = '../processed_data/embeddings/fragments/fragments_len25_embeddings.npy'
 # !!! change for new experiment !!!
-results_dir = 'results/fragments_len25/' 
+results_dir = '../results/fragments_len25/' 
 
 #hyperparameter
 batch_size = 64
 
-#change depending on your embeddings
-input_dim = 1024 #protBERT embedding dimension
-#input_dim = 8420 #kmer embeddings dimension
 
 hidden_dim = 512   
 output_dim = 6 #number of protein classes      
 dropout = 0.0
 
 #load pre-trained model
-model_path = 'results/deduplicated_protbert/mlp.pth'
-#model = MLPClassifier_protbert(input_dim, output_dim, dropout)
-
+model_path = '../results/deduplicated_protbert/mlp.pth'
 model = torch.load(model_path, map_location='cpu', weights_only=False)
 
 
