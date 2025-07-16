@@ -1,10 +1,6 @@
 from data_loader import get_dataloader
-from mlp_architecture import MLPClassifier_protbert, MLPClassifier_kmer
-from trainer import train
 from evaluator import evaluate
 import torch
-import torch.nn as nn
-import torch.optim as optim
 import os
 
 
@@ -16,17 +12,21 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 #set paths
-metadata_path = '../raw_data/protein_sequences/fragmented_test_sequences/fragments_len25.csv'
-protein_sequences_path = '../processed_data/embeddings/fragments/fragments_len25_embeddings.npy'
+metadata_path = '../raw_data/protein_sequences/fragmented_test_sequences/fragments_len200.csv'
+protein_sequences_path = '../processed_data/embeddings/fragments/fragments_len200_embeddings.npy'
 # !!! change for new experiment !!!
-results_dir = '../results/fragments_len25/' 
+results_dir = '../results/fragment_results/fragments_len200/' 
+
+#make directory for results
+os.makedirs(results_dir, exist_ok=True)
+
 
 #hyperparameter
 batch_size = 64
 
 
 hidden_dim = 512   
-output_dim = 6 #number of protein classes      
+output_dim = 6 #number of protein classes 
 dropout = 0.0
 
 #load pre-trained model
