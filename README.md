@@ -17,7 +17,7 @@ Code for the data collection process can be found in `Notebooks/Dataset_Creation
 Raw protein sequences are collected as `.fasta` files through the [UniProt](https://www.uniprot.org/) rest api. These files are saved in `raw_data`<br>
 These files are then parsed and saved in `metadata.csv` and `protein_sequences.csv`<br>
 Finally, train/val/test splits of 80%/10%/10% are created. Which split each protein belongs to can be found in the metadata file.<br>
-These can be used to train models on the *full dataset*<br><br>
+These can be used to train models on the *full dataset*.<br><br>
 
 Adittionally, the data is deduplicated using CD-HIT. These files can be found in `raw_data/Clustered_Fasta`<br>
 For each protein family, two files are produced by the CD-HIT process.<br>
