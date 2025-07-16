@@ -7,8 +7,13 @@ import torch.nn as nn
 import torch.optim as optim
 import os
 
+
+'''Certain configurations need to be set by hand. Double check before running script.
+These include: metadata_path, protein_sequences_path, results_dir, model_path'''
+
 # Set working directory: your/path/Snake_Venom_Project
-os.chdir("/home/ldrich/Summer2025BHT/Workflow_Course/Snake_Venom_Project")
+working_dir = "/home/ldrich/Summer2025BHT/Workflow_Course/Snake_Venom_Project"
+os.chdir(working_dir)
 
 # Check current working directory
 print("Current working directory:", os.getcwd())
@@ -26,9 +31,6 @@ results_dir = 'results/fragments_len25/'
 #hyperparameter
 batch_size = 64
 
-#change depending on your embeddings
-input_dim = 1024 #protBERT embedding dimension
-#input_dim = 8420 #kmer embeddings dimension
 
 hidden_dim = 512   
 output_dim = 6 #number of protein classes      
@@ -36,8 +38,6 @@ dropout = 0.0
 
 #load pre-trained model
 model_path = 'results/deduplicated_protbert/mlp.pth'
-#model = MLPClassifier_protbert(input_dim, output_dim, dropout)
-
 model = torch.load(model_path, map_location='cpu', weights_only=False)
 
 
