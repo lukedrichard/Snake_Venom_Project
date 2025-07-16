@@ -46,7 +46,6 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 model.to(device) #move model to device
 
-
 train(device, model, num_epochs, train_loader, val_loader, criterion, optimizer, results_dir)
 
 evaluate(device, model, data_loader=train_loader, results_dir=results_dir + 'train_')
