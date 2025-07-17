@@ -41,7 +41,7 @@ Futhermore, visualizations of the features can be generated with `Notebooks/t_sn
 ## Models
 Random Forest and Adaboost classifiers are trained on the k-mer features and evaluated using cross-validation with weighted metrics to handle class imbalance. We perform hyperparameter tuning with randomized search to find the best combination of tree depth, number of estimators, and splitting criteria. This approach helps capture non-linear patterns in the handcrafted features and implented in `Notebooks/ClassicAlgorithm_Deduplicated.ipynb`.<br>
 
-We also implement 4-layer MLPs as classifiers. Model training and evaluation can be performed with ~/scripts/main.py. There are two MLP architecures. Both use 4-layers, but the hidden dimensions are different depending on whether k-mer features or embeddings are used. <br><br>
+We also implement 4-layer MLPs as classifiers. Model training and evaluation can be performed with `scripts/run.py`. There are two MLP architecures. Both use 4-layers, but the hidden dimensions are different depending on whether k-mer features or embeddings are used. <br><br>
 
 Additonaly the fragmented test sequences can be evaluated by running `scripts/robustness_testing.py`<br><br>
 
@@ -56,3 +56,6 @@ Check the
 for research paper outlining other feature extraction methods and classifier models.<br><br>
 Further work with *protBERT* embeddings could be done by keeping the entire embedding array for each protein rather than only using the $[CLS]$ representation.
 A 1-Dimensional CNN could then be trained on the full embeddings.
+
+## Key Findings
+The MLP with k_mer features was the best performing model with 86.01% accuracy. Most of the incorrectly classified sequences come from the protein families SVMPs and Disintegerins. This could be because the proteins are nearly the same
